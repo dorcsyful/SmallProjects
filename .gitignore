@@ -110,3 +110,36 @@ Thumbs.db
 /Endless\ Runner/Packages/packages-lock.json
 /Endless\ Runner/.idea/
 /Endless\ Runner/*.iml
+
+# Sudoku Project specific (adjust as needed)
+/TileClicker/Library/
+/TileClicker/Temp/
+/TileClicker/Obj/
+/TileClicker/Build/
+/TileClicker/Builds/
+/TileClicker/MemoryCaptures/
+/TileClicker/*.csproj
+/TileClicker/*.unityproj
+/TileClicker/*.sln
+/TileClicker/*.suo
+/TileClicker/*.tmp
+/TileClicker/*.user
+/TileClicker/*.userprefs
+/TileClicker/*.pidb
+/TileClicker/*.booproj
+/TileClicker/*.svd
+/TileClicker/*.pdb
+/TileClicker/*.opendb
+/TileClicker/.vs/
+/TileClicker/*.DotSettings.user
+/TileClicker/.DS_Store
+/TileClicker/.DS_Store?
+/TileClicker/._*
+/TileClicker/.Spotlight-V100
+/TileClicker/.Trashes
+/TileClicker/ehthumbs.db
+/TileClicker/Thumbs.db
+/TileClicker/Packages/manifest.json
+/TileClicker/Packages/packages-lock.json
+/TileClicker/.idea/
+/TileClicker/*.iml
