@@ -143,5 +143,6 @@ Thumbs.db
 /TileClicker/Packages/packages-lock.json
 /TileClicker/.idea/
 /TileClicker/*.iml
-/TileClicker/Logs
+/TileClicker/Logs/
+/TileClicker/.utmp/
 /TileClicker/.utmp
