@@ -11,6 +11,7 @@ public enum ECOLOR
     YELLOW,
     DEFAULT
 }
+
 public class PuzzleScript : MonoBehaviour
 {
 
@@ -25,7 +26,7 @@ public class PuzzleScript : MonoBehaviour
     public float stepSpeed;
     public float speedTimer;
     public Color baseQuestionColor;
-    
+
     private InputSystem_Actions inputActions;
     private TileScript[][] puzzlePieces;
     private Dictionary<ECOLOR, Color> colorIndex;
@@ -36,6 +37,7 @@ public class PuzzleScript : MonoBehaviour
     private bool clicked;
     private int clickCount;
     private int score;
+
     private void Awake()
     {
         Saving.Load();
@@ -58,7 +60,8 @@ public class PuzzleScript : MonoBehaviour
                 puzzlePieces[i][j] = gameObject.transform.GetChild(i).GetChild(j).GetComponent<TileScript>();
                 var i1 = i;
                 var j1 = j;
-                puzzlePieces[i][j].gameObject.GetComponent<Button>().onClick.AddListener(delegate { PuzzlePress(i1, j1); });
+                puzzlePieces[i][j].gameObject.GetComponent<Button>().onClick
+                    .AddListener(delegate { PuzzlePress(i1, j1); });
             }
         }
 
@@ -66,7 +69,12 @@ public class PuzzleScript : MonoBehaviour
         InvokeRepeating(nameof(NewColor), 0f, lastRepeatRate);
     }
 
-    private void PuzzlePress(int i, int j)
+    public int GetScore()
+    {
+        return score;
+    }
+
+private void PuzzlePress(int i, int j)
     {
         ECOLOR colorCode = puzzlePieces[i][j].GetColorCode();
         switch (colorCode)
@@ -98,6 +106,7 @@ public class PuzzleScript : MonoBehaviour
     {
         score += stepScore;
         scoreText.text = score.ToString();
+        FindAnyObjectByType<PointCounter>().PointAdded();
     }
     
     private void GameOver()
