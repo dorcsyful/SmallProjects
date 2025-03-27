@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class MenuScript : MonoBehaviour
 {
@@ -12,7 +10,6 @@ public class MenuScript : MonoBehaviour
     public float moveSpeed = 10000f;
     public Vector2 moveDirection = new Vector2(1, 0); // Moves right by default
 
-    private int lastButtonIndex = 0;
     
     public void PlayGame()
     {

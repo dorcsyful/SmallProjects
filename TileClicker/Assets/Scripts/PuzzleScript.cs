@@ -20,6 +20,7 @@ public class PuzzleScript : MonoBehaviour
     [SerializeField] private GameObject yellowPieces;
     [SerializeField] private GameObject gameOverText;
     [SerializeField] private TMPro.TMP_Text scoreText;
+    [SerializeField] private TMPro.TMP_Text highScoreText;
     public int stepScore;
     public float stepSpeed;
     public float speedTimer;
@@ -37,6 +38,8 @@ public class PuzzleScript : MonoBehaviour
     private int score;
     private void Awake()
     {
+        Saving.Load();
+        highScoreText.text = Saving.savedGames.highScore.ToString();
         gameOverText.SetActive(false);
         colorIndex = new Dictionary<ECOLOR, Color>
         {
@@ -60,7 +63,7 @@ public class PuzzleScript : MonoBehaviour
         }
 
         clicked = true;
-        InvokeRepeating("NewColor", 0f, lastRepeatRate);
+        InvokeRepeating(nameof(NewColor), 0f, lastRepeatRate);
     }
 
     private void PuzzlePress(int i, int j)
@@ -91,10 +94,18 @@ public class PuzzleScript : MonoBehaviour
 
     }
     
+    public void AddScore()
+    {
+        score += stepScore;
+        scoreText.text = score.ToString();
+    }
+    
     private void GameOver()
     {
-        gameOverText.SetActive(true);
         Debug.Log("Game Over " + lastRepeatRate);
+        gameOverText.SetActive(true);
+        Saving.OverrideIfHigher(score);
+        score = 0;
         CancelInvoke();
     }
     
@@ -105,19 +116,6 @@ public class PuzzleScript : MonoBehaviour
         go.GetComponent<CounterScript>().EnlargeSection(color);
     }
 
-    private void ResetColor()
-    {
-        scoreText.text += stepScore;
-
-        for (int i = 0; i < toNull.transform.childCount; i++)
-        {
-            toNull.GetComponent<TileScript>().ResetColor();
-        }
-        
-        score += stepScore;
-        scoreText.text = score.ToString();
-        toNull = null;
-    }
     private void NewColor()
     {
         if (!clicked)
@@ -132,7 +130,7 @@ public class PuzzleScript : MonoBehaviour
             CancelInvoke();
             lastRepeatRate *= speedTimer;
             Debug.Log("Speed up: " + lastRepeatRate);
-            InvokeRepeating("NewColor", 2f, lastRepeatRate);
+            InvokeRepeating(nameof(NewColor), 2f, lastRepeatRate);
 
         }
         clicked = false;
